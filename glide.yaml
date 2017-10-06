@@ -1,0 +1,4 @@
+package: github.com/braddle/tdd-workshop-go
+import:
+- package: github.com/stretchr/testify
+  version: ^1.1.4
