@@ -16,7 +16,9 @@ Refactor the [Set](/set) stuct without breaking the tests.
 
 ### Task 3 (Mocking with Stubs)
 
-TODO
+Create a drving licence number generator using TDD. You will need to create a Stub 
+test double of the [RandomNumberGenerator](licence/driving.go) interface as part of 
+the tests.
 
 ## Task 4 (Mocking with Mocks)
 
