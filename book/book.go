@@ -41,8 +41,6 @@ type BookService interface {
 	// Both functions eturns JSON no matter the response from the service
 	getBook(isbn string) string
 	getBookWithReviews(isbn string) string
-	}
+}
 
 // Your code here!
-
-
