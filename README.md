@@ -12,7 +12,7 @@ interface.
 
 ### Task 2 (Refactoring)
 
-RefaRefactor the [Set](/set) code without breaking the tests.
+Refactor the [Set](/set) stuct without breaking the tests.
 
 ### Task 3 (Mocking with Stubs)
 
