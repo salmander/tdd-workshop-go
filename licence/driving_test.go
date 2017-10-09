@@ -29,24 +29,33 @@ func (r mockRandomNumberGenerator) createRandomNumber(numberOfDigits int) string
 func TestItCanGenerateLicenseNumberForMark(t *testing.T) {
 	mockRNG := mockRandomNumberGenerator{}
 	var testCases = []struct {
-		person        Person
-		licenseNumber string
+		licenseNumberGenerator LicenseNumberGenerator
+		licenseNumber          string
 	}{
 		{
-			person:        Person{"Mark David Bradley", time.Date(1997, 05, 12, 0, 0, 0, 0, time.Local), mockRNG},
+			licenseNumberGenerator: LicenseNumberGenerator{
+				Person{"Mark David Bradley", time.Date(1997, 05, 12, 0, 0, 0, 0, time.Local)},
+				mockRNG,
+			},
 			licenseNumber: "MDB19970512999",
 		},
 		{
-			person:        Person{"Harry Jim James Smith", time.Date(1985, 10, 9, 0, 0, 0, 0, time.Local), mockRNG},
+			licenseNumberGenerator: LicenseNumberGenerator{
+				p:            Person{"Harry Jim James Smith", time.Date(1985, 10, 9, 0, 0, 0, 0, time.Local)},
+				randomNumber: mockRNG,
+			},
 			licenseNumber: "HJJS19851009999",
 		},
 		{
-			person:        Person{"Jane Bond", time.Date(2001, 01, 01, 0, 0, 0, 0, time.Local), mockRNG},
+			licenseNumberGenerator: LicenseNumberGenerator{
+				p:            Person{"Jane Bond", time.Date(2001, 01, 01, 0, 0, 0, 0, time.Local)},
+				randomNumber: mockRNG,
+			},
 			licenseNumber: "JB20010101999",
 		},
 	}
 
 	for _, testCase := range testCases {
-		assert.Equal(t, testCase.licenseNumber, testCase.person.LicenceNumber())
+		assert.Equal(t, testCase.licenseNumber, testCase.licenseNumberGenerator.GenerateLicenseNumber())
 	}
 }
