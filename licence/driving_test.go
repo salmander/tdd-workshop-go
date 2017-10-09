@@ -1,5 +1,12 @@
 package licence
 
+import (
+	"testing"
+	"time"
+
+	"github.com/stretchr/testify/assert"
+)
+
 // Please implement a scruct that can produce driving licence numbers using TDD.
 //
 // A drving licence number it produced by taking the applicants initials, date of birth (YYYYMMDD)
@@ -12,3 +19,34 @@ package licence
 //
 // You will need to create a stub test double of the RandomNumberGenerator interface to ensure
 // tests always pass
+
+type mockRandomNumberGenerator struct{}
+
+func (r mockRandomNumberGenerator) createRandomNumber(numberOfDigits int) string {
+	return "999"
+}
+
+func TestItCanGenerateLicenseNumberForMark(t *testing.T) {
+	mockRNG := mockRandomNumberGenerator{}
+	var testCases = []struct {
+		person        Person
+		licenseNumber string
+	}{
+		{
+			person:        Person{"Mark David Bradley", time.Date(1997, 05, 12, 0, 0, 0, 0, time.Local), mockRNG},
+			licenseNumber: "MDB19970512999",
+		},
+		{
+			person:        Person{"Harry Jim James Smith", time.Date(1985, 10, 9, 0, 0, 0, 0, time.Local), mockRNG},
+			licenseNumber: "HJJS19851009999",
+		},
+		{
+			person:        Person{"Jane Bond", time.Date(2001, 01, 01, 0, 0, 0, 0, time.Local), mockRNG},
+			licenseNumber: "JB20010101999",
+		},
+	}
+
+	for _, testCase := range testCases {
+		assert.Equal(t, testCase.licenseNumber, testCase.person.LicenceNumber())
+	}
+}
